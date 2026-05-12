@@ -43,16 +43,22 @@
                     boxShadow: {
                         'glass': '0 8px 40px 0 rgba(106, 201, 135, 0.08)',
                         'luxury': '0 25px 50px -12px rgba(61, 172, 91, 0.15)',
-                        'glow': '0 0 60px -15px rgba(106, 201, 135, 0.5)',
-                        'inner-light': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.8)',
+                        'glow': '0 0 50px -10px rgba(106, 201, 135, 0.5)',
+                        'glow-hover': '0 0 70px 0px rgba(106, 201, 135, 0.8)',
                     },
                     animation: {
-                        'vertical-marquee': 'verticalMarquee 40s linear infinite',
+                        'vertical-marquee': 'verticalMarquee 18s linear infinite', /* Εδώ έγινε η αλλαγή ταχύτητας */
+                        'pulse-slow': 'pulseSlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 40s linear infinite',
                     },
                     keyframes: {
                         verticalMarquee: {
                             '0%': { transform: 'translateY(0)' },
                             '100%': { transform: 'translateY(-50%)' },
+                        },
+                        pulseSlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
                         }
                     }
                 }
@@ -111,6 +117,16 @@
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
         }
         .marquee-content:hover { animation-play-state: paused; }
+        
+        /* Shimmer effect for CTA */
+        .shimmer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .group:hover .shimmer { transform: translateX(100%); }
     </style>
 
     <!-- Icons -->
@@ -155,30 +171,43 @@
         </div>
     </nav>
 
-    <!-- Centered Hero Section (Minimal & Luxurious) -->
-    <section class="relative min-h-[90svh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+    <!-- Centered Hero Section (Wow, Minimal & Luxurious) -->
+    <section class="relative min-h-[100svh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
         
-        <!-- Extremely subtle luxury gradient background -->
-        <div class="absolute inset-0 z-0 bg-gradient-to-b from-brand-mint/10 via-brand-lightest to-brand-lightest pointer-events-none"></div>
+        <!-- Luxurious Animated Background -->
+        <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+            <!-- Pulsing deep green aura behind text -->
+            <div class="absolute w-[60vw] md:w-[40vw] h-[60vw] md:h-[40vw] bg-brand-primary/20 rounded-full blur-[100px] animate-pulse-slow"></div>
+            
+            <!-- Ultra-minimal luxury rotating ring -->
+            <div class="absolute w-[80vw] md:w-[50vw] h-[80vw] md:h-[50vw] rounded-full border border-brand-primary/10 border-t-brand-primary/40 animate-spin-slow"></div>
+            
+            <!-- Base gradient to ensure readability -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-lightest/50 to-brand-lightest"></div>
+        </div>
 
         <div class="max-w-4xl mx-auto w-full relative z-20 text-center flex flex-col items-center reveal">
             
-            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-brand-mint/30 text-brand-slate text-xs font-semibold mb-10 tracking-widest no-accents">
-                <span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-brand-primary/30 bg-white/40 backdrop-blur-md shadow-sm text-brand-slate text-xs font-semibold mb-10 tracking-widest no-accents">
+                <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
                 100% ONLINE ΣΥΝΕΔΡΙΕΣ
             </div>
             
-            <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-serif text-brand-slate leading-[1.05] mb-8 text-balance">
+            <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-serif text-brand-slate leading-[1.05] mb-8 text-balance drop-shadow-sm">
                 Βρίσκοντας την <span class="italic font-light pr-2">Εσωτερική</span> Ισορροπία
             </h1>
             
-            <p class="text-lg md:text-2xl text-brand-muted max-w-2xl mx-auto font-light leading-relaxed mb-12 text-balance">
+            <p class="text-lg md:text-2xl text-brand-muted max-w-2xl mx-auto font-light leading-relaxed mb-14 text-balance">
                 Συνθετική Ψυχοθεραπεία & Νευροψυχολογία από τη Σπυριδούλα Μουρτζιάπη. Ένας ψηφιακός χώρος για ενδυνάμωση, αποδοχή και ουσιαστική αλλαγή.
             </p>
             
-            <a href="#contact" class="px-12 py-5 bg-brand-slate text-brand-lightest rounded-full font-semibold hover:bg-brand-primary transition-all duration-500 shadow-[0_15px_30px_-10px_rgba(17,31,21,0.2)] flex items-center justify-center gap-4 group text-sm tracking-widest no-accents">
-                ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ
-                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform duration-500"></i>
+            <!-- "Wow" Glowing Button -->
+            <a href="#contact" class="relative px-12 py-5 bg-brand-slate text-brand-lightest rounded-full font-semibold transition-all duration-500 shadow-glow hover:shadow-glow-hover flex items-center justify-center gap-4 group text-sm tracking-widest no-accents overflow-hidden border border-brand-primary/20">
+                <span class="shimmer"></span>
+                <span class="relative z-10 flex items-center gap-4">
+                    ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform duration-500"></i>
+                </span>
             </a>
             
         </div>
@@ -188,7 +217,8 @@
     <section id="about" class="py-24 px-6 relative z-10 border-t border-brand-mint/10">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-20 items-center">
             
-            <div class="lg:col-span-5 relative reveal">
+            <!-- Η εικόνα κατέβηκε πιο κάτω στο desktop (lg:translate-y-16) -->
+            <div class="lg:col-span-5 relative reveal lg:translate-y-16">
                 <div class="relative z-10 img-wrapper rounded-[2.5rem] shadow-luxury p-3 glass-panel border-white">
                     <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/2025-05-14.jpg" alt="Σπυριδούλα Μουρτζιάπη - Συνθετική Ψυχοθεραπεύτρια" class="w-full h-auto object-cover rounded-[2rem]">
                 </div>
@@ -214,7 +244,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-32 px-6 bg-brand-slate text-brand-lightest relative overflow-hidden rounded-[3rem] mx-4 lg:mx-8 my-10 shadow-2xl">
+    <section id="services" class="py-32 px-6 bg-brand-slate text-brand-lightest relative overflow-hidden rounded-[3rem] mx-4 lg:mx-8 my-20 shadow-2xl">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-24 reveal">
                 <span class="text-brand-mint font-semibold tracking-widest text-xs uppercase no-accents mb-6 block">ΕΞΕΙΔΙΚΕΥΜΕΝΕΣ ΥΠΗΡΕΣΙΕΣ</span>
@@ -329,7 +359,7 @@
         </div>
     </section>
 
-    <!-- Reviews Section (Seamless Vertical Marquee) -->
+    <!-- Reviews Section (Fast Seamless Vertical Marquee) -->
     <section id="reviews" class="py-32 relative overflow-hidden bg-brand-lightest border-t border-brand-soft/10">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
             
@@ -345,16 +375,11 @@
                 </a>
             </div>
 
-            <!-- Vertical Scrolling Container -->
+            <!-- Vertical Scrolling Container (Faster Animation: 18s) -->
             <div class="relative h-[650px] overflow-hidden vertical-marquee-container flex justify-center lg:justify-end reveal reveal-delay-2">
-                <!-- 
-                   The animated div contains TWO identical halves.
-                   It animates translateY from 0% to -50%.
-                   Because the second half is identical, the loop is perfect.
-                -->
                 <div class="w-full max-w-lg flex flex-col gap-6 animate-vertical-marquee marquee-content">
                     
-                    <!-- ====== FIRST HALF (All 5 Reviews) ====== -->
+                    <!-- ====== FIRST HALF ====== -->
                     <div class="flex flex-col gap-6">
                         <!-- Review 1 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
@@ -447,7 +472,7 @@
                         </div>
                     </div>
                     
-                    <!-- ====== SECOND HALF (Exact Duplicate for Loop) ====== -->
+                    <!-- ====== SECOND HALF (Exact Duplicate) ====== -->
                     <div class="flex flex-col gap-6" aria-hidden="true">
                         <!-- Review 1 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
