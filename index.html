@@ -47,7 +47,7 @@
                         'glow-hover': '0 0 70px 0px rgba(106, 201, 135, 0.8)',
                     },
                     animation: {
-                        'vertical-marquee': 'verticalMarquee 18s linear infinite', /* Εδώ έγινε η αλλαγή ταχύτητας */
+                        'vertical-marquee': 'verticalMarquee 18s linear infinite', 
                         'pulse-slow': 'pulseSlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'spin-slow': 'spin 40s linear infinite',
                     },
@@ -58,7 +58,7 @@
                         },
                         pulseSlow: {
                             '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
                         }
                     }
                 }
@@ -103,7 +103,7 @@
         .glass-card:hover {
             transform: translateY(-8px);
             border-color: rgba(106, 201, 135, 0.3);
-            box-shadow: 0 25px 50px -12px rgba(106, 201, 135, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(106, 201, 135, 0.15);
         }
 
         /* Organic Image Hover */
@@ -127,6 +127,13 @@
             transition: transform 0.6s ease;
         }
         .group:hover .shimmer { transform: translateX(100%); }
+
+        /* FAQ Transition */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
     </style>
 
     <!-- Icons -->
@@ -140,22 +147,23 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-700 py-8" id="navbar">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="glass-panel rounded-full flex justify-between items-center px-4 py-2.5 transition-all">
+            <div class="glass-panel rounded-full flex justify-between items-center px-4 py-2.5 transition-all shadow-sm">
                 <a href="#" class="flex items-center group relative z-10">
                     <div class="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center p-0.5 transform transition-transform duration-700 group-hover:scale-105 border border-brand-soft/20">
                         <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/logomou.jpg" alt="Σπυριδούλα Μουρτζιάπη Logo" class="w-full h-full object-contain rounded-full">
                     </div>
                 </a>
                 
-                <div class="hidden md:flex items-center space-x-12">
-                    <a href="#about" class="text-xs font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">Η ΠΡΟΣΕΓΓΙΣΗ</a>
-                    <a href="#services" class="text-xs font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">ΥΠΗΡΕΣΙΕΣ</a>
-                    <a href="#philosophy" class="text-xs font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">ΦΙΛΟΣΟΦΙΑ</a>
-                    <a href="#reviews" class="text-xs font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">ΑΞΙΟΛΟΓΗΣΕΙΣ</a>
+                <div class="hidden lg:flex items-center space-x-10">
+                    <a href="#about" class="text-[11px] font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">Η ΠΡΟΣΕΓΓΙΣΗ</a>
+                    <a href="#services" class="text-[11px] font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">ΥΠΗΡΕΣΙΕΣ</a>
+                    <a href="#philosophy" class="text-[11px] font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">ΦΙΛΟΣΟΦΙΑ</a>
+                    <a href="#roadmap" class="text-[11px] font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">Η ΔΙΑΔΡΟΜΗ</a>
+                    <a href="#faq" class="text-[11px] font-semibold text-brand-slate hover:text-brand-primary transition-colors tracking-widest no-accents">FAQ</a>
                     <a href="#contact" class="px-8 py-3.5 bg-brand-slate text-brand-lightest rounded-full text-xs font-semibold tracking-widest no-accents hover:bg-brand-primary transition-all duration-500 shadow-lg hover:shadow-luxury">ΡΑΝΤΕΒΟΥ</a>
                 </div>
 
-                <button class="md:hidden text-brand-slate p-2 focus:outline-none" id="mobile-menu-btn">
+                <button class="lg:hidden text-brand-slate p-2 focus:outline-none" id="mobile-menu-btn">
                     <i data-lucide="menu" class="w-7 h-7 stroke-[1.5]"></i>
                 </button>
             </div>
@@ -166,35 +174,44 @@
             <a href="#about" class="text-sm font-semibold tracking-widest no-accents text-brand-slate mobile-link">Η ΠΡΟΣΕΓΓΙΣΗ</a>
             <a href="#services" class="text-sm font-semibold tracking-widest no-accents text-brand-slate mobile-link">ΥΠΗΡΕΣΙΕΣ</a>
             <a href="#philosophy" class="text-sm font-semibold tracking-widest no-accents text-brand-slate mobile-link">ΦΙΛΟΣΟΦΙΑ</a>
+            <a href="#roadmap" class="text-sm font-semibold tracking-widest no-accents text-brand-slate mobile-link">Η ΔΙΑΔΡΟΜΗ</a>
+            <a href="#faq" class="text-sm font-semibold tracking-widest no-accents text-brand-slate mobile-link">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</a>
             <a href="#reviews" class="text-sm font-semibold tracking-widest no-accents text-brand-slate mobile-link">ΑΞΙΟΛΟΓΗΣΕΙΣ</a>
             <a href="#contact" class="px-10 py-4 bg-brand-slate text-brand-lightest rounded-full text-sm font-semibold tracking-widest no-accents mobile-link shadow-luxury">ΡΑΝΤΕΒΟΥ</a>
         </div>
     </nav>
 
-    <!-- Centered Hero Section (Wow, Minimal & Luxurious) -->
+    <!-- Centered Hero Section (Wow, Minimal, Luxurious & Layered) -->
     <section class="relative min-h-[100svh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
         
-        <!-- Luxurious Animated Background -->
+        <!-- Deep & Luxurious Animated Background Lines & Glows -->
         <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-            <!-- Pulsing deep green aura behind text -->
-            <div class="absolute w-[60vw] md:w-[40vw] h-[60vw] md:h-[40vw] bg-brand-primary/20 rounded-full blur-[100px] animate-pulse-slow"></div>
+            <!-- Central deep glow -->
+            <div class="absolute w-[70vw] md:w-[45vw] h-[70vw] md:h-[45vw] bg-brand-primary/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+            <div class="absolute w-[40vw] md:w-[25vw] h-[40vw] md:h-[25vw] bg-brand-soft/30 rounded-full blur-[80px] animate-pulse-slow" style="animation-delay: 2s;"></div>
             
-            <!-- Ultra-minimal luxury rotating ring -->
-            <div class="absolute w-[80vw] md:w-[50vw] h-[80vw] md:h-[50vw] rounded-full border border-brand-primary/10 border-t-brand-primary/40 animate-spin-slow"></div>
+            <!-- Ultra-minimal luxury rotating rings -->
+            <div class="absolute w-[90vw] md:w-[60vw] h-[90vw] md:h-[60vw] rounded-full border border-brand-primary/10 border-t-brand-primary/30 animate-[spin_50s_linear_infinite]"></div>
+            <div class="absolute w-[75vw] md:w-[45vw] h-[75vw] md:h-[45vw] rounded-full border border-brand-mint/10 border-b-brand-primary/40 animate-[spin_40s_linear_infinite_reverse]"></div>
+            <div class="absolute w-[60vw] md:w-[30vw] h-[60vw] md:h-[30vw] rounded-full border border-brand-soft/5 border-l-brand-primary/20 animate-[spin_30s_linear_infinite]"></div>
+            
+            <!-- Elegant glowing vertical lines -->
+            <div class="absolute top-0 left-[15%] md:left-[25%] w-[1px] h-full bg-gradient-to-b from-transparent via-brand-primary/20 to-transparent"></div>
+            <div class="absolute top-0 right-[15%] md:right-[25%] w-[1px] h-full bg-gradient-to-b from-transparent via-brand-mint/20 to-transparent"></div>
             
             <!-- Base gradient to ensure readability -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-lightest/50 to-brand-lightest"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-lightest/40 to-brand-lightest"></div>
         </div>
 
         <div class="max-w-4xl mx-auto w-full relative z-20 text-center flex flex-col items-center reveal">
             
-            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-brand-primary/30 bg-white/40 backdrop-blur-md shadow-sm text-brand-slate text-xs font-semibold mb-10 tracking-widest no-accents">
+            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-brand-primary/30 bg-white/60 backdrop-blur-md shadow-sm text-brand-slate text-xs font-semibold mb-10 tracking-widest no-accents">
                 <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
                 100% ONLINE ΣΥΝΕΔΡΙΕΣ
             </div>
             
             <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-serif text-brand-slate leading-[1.05] mb-8 text-balance drop-shadow-sm">
-                Βρίσκοντας την <span class="italic font-light pr-2">Εσωτερική</span> Ισορροπία
+                Βρίσκοντας την <span class="italic font-light pr-2 text-transparent bg-clip-text bg-gradient-to-r from-brand-slate to-brand-primary">Εσωτερική</span> Ισορροπία
             </h1>
             
             <p class="text-lg md:text-2xl text-brand-muted max-w-2xl mx-auto font-light leading-relaxed mb-14 text-balance">
@@ -261,7 +278,7 @@
                     </div>
                     <h3 class="text-3xl font-serif text-white mb-6 leading-tight">Διαχείριση Άγχους, Κατάθλιψης & Ψυχικού Τραύματος</h3>
                     <p class="text-gray-400 mb-10 font-light leading-relaxed text-lg">
-                        Όταν το χρόνιο άγχος, τα τραύματα του παρελθόντος και η καταθλιπτική διάθεση γίνονται εμπόδιο. Συνδυάζουμε τη δομή της CBT με τη βιωματική εστίαση της Gestalt για να ανακτήσετε τη λειτουργικότητά σας.
+                        Όταν το χρόνιο άγχος, τα τραύματα του παρελθόντος και η καταθλιπτική διάθεση γίνονται εμπόδιο. Συνδυάζουμε τη δομή της CBT με τη βιωματική εστίαση της Gestalt.
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <span class="px-4 py-1.5 bg-brand-lightest/5 text-brand-soft text-xs font-medium tracking-wide rounded-full border border-white/10">Ατομικές 50'</span>
@@ -276,7 +293,7 @@
                     </div>
                     <h3 class="text-3xl font-serif text-white mb-6 leading-tight">Όρια, Χαμηλή Αυτοεκτίμηση & Μεταβάσεις Ζωής</h3>
                     <p class="text-gray-400 mb-10 font-light leading-relaxed text-lg">
-                        Νιώθετε μετέωροι μπροστά σε αλλαγές; Δουλεύουμε πρακτικά στο πώς να επικοινωνείτε διεκδικητικά, να θέτετε υγιή όρια στις σχέσεις σας και να χτίσετε μια σταθερή, αληθινή αυτοεκτίμηση.
+                        Νιώθετε μετέωροι μπροστά σε αλλαγές; Δουλεύουμε πρακτικά στο πώς να επικοινωνείτε διεκδικητικά, να θέτετε υγιή όρια στις σχέσεις σας και να χτίσετε μια σταθερή αυτοεκτίμηση.
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <span class="px-4 py-1.5 bg-brand-lightest/5 text-brand-soft text-xs font-medium tracking-wide rounded-full border border-white/10">Προσαρμογή</span>
@@ -306,7 +323,7 @@
                     </div>
                     <h3 class="text-3xl font-serif text-white mb-6 leading-tight">Διαδικτυακή Ψυχοθεραπεία (100% Online)</h3>
                     <p class="text-gray-400 mb-10 font-light leading-relaxed text-lg">
-                        Μέγιστη ευελιξία ανεξάρτητα από τον τόπο διαμονής σας. Όλες οι συνεδρίες διεξάγονται μέσω ασφαλούς βιντεοκλήσης με την ίδια αμεσότητα και εχεμύθεια, από την άνεση του χώρου σας.
+                        Μέγιστη ευελιξία ανεξάρτητα από τον τόπο διαμονής σας. Όλες οι συνεδρίες διεξάγονται μέσω ασφαλούς βιντεοκλήσης με την ίδια αμεσότητα και εχεμύθεια, από τον χώρο σας.
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <span class="px-4 py-1.5 bg-brand-lightest/5 text-brand-soft text-xs font-medium tracking-wide rounded-full border border-white/10">Βιντεοκλήση</span>
@@ -335,7 +352,7 @@
                     <i data-lucide="dna" class="w-8 h-8 text-brand-dark mb-8 stroke-[1.5]"></i>
                     <h4 class="text-2xl font-serif text-brand-slate mb-6 leading-snug">Το Νευρολογικό Θεμέλιο</h4>
                     <p class="text-brand-muted font-light leading-relaxed">
-                        Η ψυχική υγεία έχει και βιολογική βάση. Το Μεταπτυχιακό μου στην Κλινική Νευροψυχολογία μού επιτρέπει να κατανοώ πώς ακριβώς αντιδρά ο εγκέφαλος. Αυτό που νιώθετε δεν είναι αδυναμία, είναι η φυσιολογική αντίδραση του νευρικού συστήματος.
+                        Η ψυχική υγεία έχει και βιολογική βάση. Το Μεταπτυχιακό μου στην Κλινική Νευροψυχολογία μού επιτρέπει να κατανοώ πώς ακριβώς αντιδρά ο εγκέφαλος.
                     </p>
                 </div>
 
@@ -343,7 +360,7 @@
                     <i data-lucide="layers" class="w-8 h-8 text-brand-primary mb-8 stroke-[1.5]"></i>
                     <h4 class="text-2xl font-serif text-brand-slate mb-6 leading-snug">Η Γνωσιακή Αρχιτεκτονική</h4>
                     <p class="text-brand-muted font-light leading-relaxed">
-                        Χρησιμοποιώ τη δομή της Γνωσιακής Συμπεριφορικής (CBT) για να "αποκαθηλώσετε" τοξικές πεποιθήσεις, ενώ δανείζομαι την ενσυναίσθηση της Gestalt για επαφή με το πραγματικό σας συναίσθημα τη στιγμή που συμβαίνει.
+                        Χρησιμοποιώ τη δομή της Γνωσιακής Συμπεριφορικής (CBT) για να "αποκαθηλώσετε" τοξικές πεποιθήσεις, μαζί με την ενσυναίσθηση της Gestalt.
                     </p>
                 </div>
 
@@ -351,10 +368,134 @@
                     <i data-lucide="network" class="w-8 h-8 text-brand-soft mb-8 stroke-[1.5]"></i>
                     <h4 class="text-2xl font-serif text-brand-slate mb-6 leading-snug">Η Κοινωνική Προσαρμοστικότητα</h4>
                     <p class="text-brand-muted font-light leading-relaxed">
-                        Η ανθρώπινη ψυχή έχει μια απίστευτη ικανότητα να προσαρμόζεται στο κατάλληλο πλαίσιο. Ανεξάρτητα από τους περιορισμούς, ο στόχος είναι να βρούμε τη δύναμη για να διεκδικήσετε τη ζωή που σας αξίζει.
+                        Η ανθρώπινη ψυχή έχει μια απίστευτη ικανότητα να προσαρμόζεται στο κατάλληλο πλαίσιο. Στόχος είναι να βρούμε τη δύναμη για να διεκδικήσετε τη ζωή σας.
                     </p>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Roadmap Section -->
+    <section id="roadmap" class="py-32 px-6 relative bg-gradient-to-b from-transparent to-brand-mint/5 overflow-hidden">
+        <div class="absolute right-0 top-1/4 w-[500px] h-[500px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-24 reveal">
+                <span class="text-brand-primary font-semibold tracking-widest text-xs no-accents mb-6 block">Η ΔΙΑΔΡΟΜΗ ΤΗΣ ΘΕΡΑΠΕΙΑΣ</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-slate mb-8">Βήματα προς την Αλλαγή</h2>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Line (Desktop) -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-primary/10 via-brand-primary/40 to-transparent transform -translate-x-1/2"></div>
+
+                <div class="space-y-16">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between reveal group">
+                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-8 md:mb-0">
+                            <h4 class="text-2xl font-serif text-brand-slate mb-4 group-hover:text-brand-primary transition-colors">1. Επικοινωνία & Ραντεβού</h4>
+                            <p class="text-brand-muted font-light leading-relaxed">Κάνετε το πρώτο βήμα κλείνοντας ένα διαδικτυακό ραντεβού την ημέρα και ώρα που σας εξυπηρετεί, εξασφαλίζοντας τον δικό σας χρόνο.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-white border border-brand-primary/30 shadow-[0_0_20px_rgba(106,201,135,0.3)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+                            <span class="w-3 h-3 rounded-full bg-brand-primary"></span>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col md:flex-row-reverse items-center justify-between reveal reveal-delay-1 group">
+                        <div class="md:w-[45%] text-center md:text-left pl-0 md:pl-12 mb-8 md:mb-0">
+                            <h4 class="text-2xl font-serif text-brand-slate mb-4 group-hover:text-brand-primary transition-colors">2. Πρώτη Αξιολόγηση</h4>
+                            <p class="text-brand-muted font-light leading-relaxed">Μια αρχική, ζεστή συζήτηση για να κατανοήσουμε τις ανάγκες σας σε ένα περιβάλλον απόλυτης αποδοχής, χωρίς καμία κριτική.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-white border border-brand-primary/30 shadow-[0_0_20px_rgba(106,201,135,0.3)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+                            <span class="w-3 h-3 rounded-full bg-brand-primary"></span>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between reveal reveal-delay-2 group">
+                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-8 md:mb-0">
+                            <h4 class="text-2xl font-serif text-brand-slate mb-4 group-hover:text-brand-primary transition-colors">3. Συνθετικό Πλάνο</h4>
+                            <p class="text-brand-muted font-light leading-relaxed">Σχεδιάζουμε τη θεραπευτική προσέγγιση αντλώντας εργαλεία από την CBT και την Gestalt, προσαρμοσμένα αποκλειστικά στη δική σας ιδιοσυγκρασία.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-white border border-brand-primary/30 shadow-[0_0_20px_rgba(106,201,135,0.3)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+                            <span class="w-3 h-3 rounded-full bg-brand-primary"></span>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col md:flex-row-reverse items-center justify-between reveal reveal-delay-1 group">
+                        <div class="md:w-[45%] text-center md:text-left pl-0 md:pl-12">
+                            <h4 class="text-2xl font-serif text-brand-slate mb-4 group-hover:text-brand-primary transition-colors">4. Επούλωση & Ολοκλήρωση</h4>
+                            <p class="text-brand-muted font-light leading-relaxed">Δουλεύουμε σταθερά προς την αυτογνωσία. Ανακτάτε τη λειτουργικότητά σας, θέτετε όρια και βρίσκετε την εσωτερική σας αρμονία.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-white border border-brand-primary/30 shadow-[0_0_20px_rgba(106,201,135,0.3)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-primary"></i>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: FAQ Section -->
+    <section id="faq" class="py-32 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <span class="text-brand-primary font-semibold tracking-widest text-xs no-accents mb-6 block">FAQ</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-brand-slate mb-8">Συχνές Ερωτήσεις</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="glass-card rounded-[1.5rem] border border-brand-mint/20 overflow-hidden reveal">
+                    <button class="faq-btn w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif font-semibold text-brand-slate group-hover:text-brand-primary transition-colors">Πού γίνονται οι συνεδρίες;</span>
+                        <div class="w-8 h-8 rounded-full border border-brand-mint/30 flex items-center justify-center shrink-0 bg-white/50 group-hover:bg-brand-primary/10 transition-colors">
+                            <i data-lucide="plus" class="faq-icon w-4 h-4 text-brand-primary transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content bg-white/30">
+                        <p class="px-8 pb-8 text-brand-muted font-light leading-relaxed">
+                            Το γραφείο λειτουργεί αποκλειστικά διαδικτυακά (100% online). Όλες οι συνεδρίες διεξάγονται μέσω ασφαλούς βιντεοκλήσης, προσφέροντας μέγιστη ευελιξία ανεξάρτητα από τον τόπο διαμονής σας, με την ίδια αμεσότητα και εχεμύθεια μιας δια ζώσης συνάντησης.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-card rounded-[1.5rem] border border-brand-mint/20 overflow-hidden reveal reveal-delay-1">
+                    <button class="faq-btn w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif font-semibold text-brand-slate group-hover:text-brand-primary transition-colors">Πόσο διαρκεί η κάθε συνεδρία;</span>
+                        <div class="w-8 h-8 rounded-full border border-brand-mint/30 flex items-center justify-center shrink-0 bg-white/50 group-hover:bg-brand-primary/10 transition-colors">
+                            <i data-lucide="plus" class="faq-icon w-4 h-4 text-brand-primary transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content bg-white/30">
+                        <p class="px-8 pb-8 text-brand-muted font-light leading-relaxed">
+                            Η ατομική συνεδρία, καθώς και η συνεδρία εφήβων ή συμβουλευτικής γονέων, έχει διάρκεια 50 λεπτά. Αυτός ο χρόνος θεωρείται ο βέλτιστος (θεραπευτική ώρα) για να διατηρείται η συγκέντρωση και να υπάρχει ωφέλιμη επεξεργασία.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-card rounded-[1.5rem] border border-brand-mint/20 overflow-hidden reveal reveal-delay-2">
+                    <button class="faq-btn w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif font-semibold text-brand-slate group-hover:text-brand-primary transition-colors">Τι είναι η Συνθετική Ψυχοθεραπεία;</span>
+                        <div class="w-8 h-8 rounded-full border border-brand-mint/30 flex items-center justify-center shrink-0 bg-white/50 group-hover:bg-brand-primary/10 transition-colors">
+                            <i data-lucide="plus" class="faq-icon w-4 h-4 text-brand-primary transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content bg-white/30">
+                        <p class="px-8 pb-8 text-brand-muted font-light leading-relaxed">
+                            Η Συνθετική Ψυχοθεραπεία δεν περιορίζεται σε μία μόνο θεωρία. Αντλεί και συνδυάζει δυναμικά τις πιο αποτελεσματικές τεχνικές από διαφορετικά ψυχοθεραπευτικά ρεύματα —όπως η Γνωσιακή Συμπεριφορική (CBT) για τις σκέψεις και η Gestalt για το συναίσθημα— προσαρμόζοντας την παρέμβαση απόλυτα σε εσάς.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -378,10 +519,8 @@
             <!-- Vertical Scrolling Container (Faster Animation: 18s) -->
             <div class="relative h-[650px] overflow-hidden vertical-marquee-container flex justify-center lg:justify-end reveal reveal-delay-2">
                 <div class="w-full max-w-lg flex flex-col gap-6 animate-vertical-marquee marquee-content">
-                    
                     <!-- ====== FIRST HALF ====== -->
                     <div class="flex flex-col gap-6">
-                        <!-- Review 1 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -399,7 +538,6 @@
                             </div>
                         </div>
 
-                        <!-- Review 2 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -410,14 +548,13 @@
                                 </div>
                                 <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία. Τη συστήνω ανεπιφύλακτα!"</p>
+                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία."</p>
                             <div class="border-t border-gray-100 pt-5">
                                 <p class="text-xs font-semibold text-brand-slate tracking-widest no-accents mb-1">ΑΘΗΝΑ</p>
                                 <p class="text-xs text-gray-400 font-light tracking-wide">08 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <!-- Review 3 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -428,14 +565,13 @@
                                 </div>
                                 <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια και εμπιστοσύνη."</p>
+                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια."</p>
                             <div class="border-t border-gray-100 pt-5">
                                 <p class="text-xs font-semibold text-brand-slate tracking-widest no-accents mb-1">ANASTASIA</p>
                                 <p class="text-xs text-gray-400 font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <!-- Review 4 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -453,7 +589,6 @@
                             </div>
                         </div>
 
-                        <!-- Review 5 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -474,7 +609,6 @@
                     
                     <!-- ====== SECOND HALF (Exact Duplicate) ====== -->
                     <div class="flex flex-col gap-6" aria-hidden="true">
-                        <!-- Review 1 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -492,7 +626,6 @@
                             </div>
                         </div>
 
-                        <!-- Review 2 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -503,14 +636,13 @@
                                 </div>
                                 <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία. Τη συστήνω ανεπιφύλακτα!"</p>
+                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία."</p>
                             <div class="border-t border-gray-100 pt-5">
                                 <p class="text-xs font-semibold text-brand-slate tracking-widest no-accents mb-1">ΑΘΗΝΑ</p>
                                 <p class="text-xs text-gray-400 font-light tracking-wide">08 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <!-- Review 3 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -521,14 +653,13 @@
                                 </div>
                                 <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια και εμπιστοσύνη."</p>
+                            <p class="text-brand-slate text-base mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια."</p>
                             <div class="border-t border-gray-100 pt-5">
                                 <p class="text-xs font-semibold text-brand-slate tracking-widest no-accents mb-1">ANASTASIA</p>
                                 <p class="text-xs text-gray-400 font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <!-- Review 4 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -546,7 +677,6 @@
                             </div>
                         </div>
 
-                        <!-- Review 5 -->
                         <div class="bg-white p-10 rounded-[2rem] shadow-[0_10px_30px_-10px_rgba(17,31,21,0.05)] border border-brand-mint/20">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
@@ -665,6 +795,34 @@
                 navbar.classList.add('py-8');
                 navbar.classList.remove('py-4', 'bg-white/95', 'backdrop-blur-2xl', 'shadow-sm');
             }
+        });
+
+        // FAQ Toggle Logic
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.faq-icon');
+                
+                // Close other open FAQs
+                faqBtns.forEach(otherBtn => {
+                    if (otherBtn !== this) {
+                        const otherContent = otherBtn.nextElementSibling;
+                        const otherIcon = otherBtn.querySelector('.faq-icon');
+                        otherContent.style.maxHeight = null;
+                        otherIcon.classList.remove('rotate-45');
+                    }
+                });
+
+                // Toggle current FAQ
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('rotate-45');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.add('rotate-45');
+                }
+            });
         });
 
         // Intersection Observer for Scroll Reveals
