@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,34 +28,34 @@
                     colors: {
                         brand: {
                             beige: '#FDF6E3',
-                            brown: '#4A3B32',
-                            brownLight: '#6D5A4E',
-                            mint: '#97e6b7', /* Kept for subtle accents if needed */
-                            primary: '#6ac987',
+                            brown: '#3E2723',       /* Deep elegant brown */
+                            lightbrown: '#5D4037', /* Slightly lighter brown for muted text */
+                            green: '#8C9A76',      /* Muted leaf green for subtle accents */
                         }
                     },
                     fontFamily: {
-                        /* Making serif the default for EVERYTHING */
-                        sans: ['Cormorant Garamond', 'serif'],
+                        /* Forcing the elegant serif everywhere */
                         serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Cormorant Garamond', 'serif'], 
                     },
                     boxShadow: {
-                        'soft': '0 10px 40px -10px rgba(74, 59, 50, 0.08)',
-                        'luxury': '0 20px 50px -12px rgba(74, 59, 50, 0.15)',
+                        'glass': '0 8px 40px 0 rgba(62, 39, 35, 0.05)',
+                        'luxury': '0 25px 50px -12px rgba(62, 39, 35, 0.1)',
+                        'glow': '0 0 40px -10px rgba(140, 154, 118, 0.4)',
                     },
                     animation: {
-                        'float': 'float 8s ease-in-out infinite',
-                        'float-delayed': 'float 8s ease-in-out 4s infinite',
-                        'vertical-marquee': 'verticalMarquee 18s linear infinite',
+                        'vertical-marquee': 'verticalMarquee 18s linear infinite', 
+                        'leaf-float': 'float 8s ease-in-out infinite',
+                        'leaf-float-delayed': 'float 10s ease-in-out infinite 2s',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-15px) rotate(2deg)' },
-                        },
                         verticalMarquee: {
                             '0%': { transform: 'translateY(0)' },
                             '100%': { transform: 'translateY(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(3deg)' },
                         }
                     }
                 }
@@ -65,17 +65,20 @@
 
     <!-- Custom CSS -->
     <style>
+        /* Base & Scrollbar */
         body { 
             background-color: #FDF6E3; 
-            color: #4A3B32; 
-            -webkit-font-smoothing: antialiased; 
+            color: #3E2723; 
             font-family: 'Cormorant Garamond', serif;
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
         }
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #FDF6E3; }
-        ::-webkit-scrollbar-thumb { background: #6D5A4E; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4A3B32; }
+        ::-webkit-scrollbar-thumb { background: #8C9A76; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3E2723; }
 
+        /* Typography Utilities */
         .no-accents { text-transform: uppercase; letter-spacing: 0.15em; }
         .text-balance { text-wrap: balance; }
 
@@ -85,95 +88,87 @@
         .reveal-delay-1 { transition-delay: 0.2s; }
         .reveal-delay-2 { transition-delay: 0.4s; }
 
-        /* Watercolor Leaf Corners with Parallax/Float */
-        .leaf-bg {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background-image: url('https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/mourlogooo.jpg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            mix-blend-multiply; /* Blends white background into beige perfectly */
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-            filter: contrast(1.1) brightness(1.05); /* Enhances watercolor look */
+        /* Luxury Glassmorphism & Cards */
+        .glass-panel {
+            background: rgba(253, 246, 227, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            box-shadow: var(--tw-shadow-glass);
         }
-        .leaf-top-left { top: -50px; left: -50px; transform: rotate(-20deg); }
-        .leaf-top-right { top: -50px; right: -50px; transform: scaleX(-1) rotate(-20deg); }
-        .leaf-bottom-left { bottom: -50px; left: -50px; transform: scaleY(-1) rotate(-20deg); }
-        .leaf-bottom-right { bottom: -50px; right: -50px; transform: scale(-1, -1) rotate(-20deg); }
-        
-        /* Parallax attachment for global background leaves */
-        .parallax-leaves {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: -1;
-            background-image: url('https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/mourlogooo.jpg'), url('https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/mourlogooo.jpg');
-            background-position: top -10% left -10%, bottom -10% right -10%;
-            background-size: 400px, 500px;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            mix-blend-multiply;
-            opacity: 0.15;
-        }
-
-        /* Elegant Card Style */
-        .elegant-card {
-            background: rgba(253, 246, 227, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(74, 59, 50, 0.1);
-            box-shadow: var(--tw-shadow-soft);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(62, 39, 35, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(62, 39, 35, 0.05);
             transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .elegant-card:hover {
+        .glass-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--tw-shadow-luxury);
-            border-color: rgba(74, 59, 50, 0.2);
+            border-color: rgba(140, 154, 118, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(62, 39, 35, 0.1);
         }
 
+        /* Image Masking & Hover */
         .img-wrapper { overflow: hidden; position: relative; }
         .img-wrapper img { transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .img-wrapper:hover img { transform: scale(1.04); }
 
+        /* Vertical Marquee Mask */
         .vertical-marquee-container {
             mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
         }
         .marquee-content:hover { animation-play-state: paused; }
+        
+        /* Shimmer effect for CTA */
+        .shimmer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgba(253, 246, 227, 0.3) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .group:hover .shimmer { transform: translateX(100%); }
 
+        /* FAQ Transition */
         .faq-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+
+        /* Watercolor Leaf Blend Mode */
+        .watercolor-leaf {
+            mix-blend-mode: multiply;
+            opacity: 0.65;
+            filter: contrast(1.1) brightness(0.95);
+        }
     </style>
 
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="relative">
-
-    <!-- Global Parallax Leaves -->
-    <div class="parallax-leaves"></div>
+<body class="relative bg-brand-beige text-brand-brown">
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-700 py-6" id="navbar">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="elegant-card rounded-full flex justify-between items-center px-4 py-2 transition-all shadow-sm bg-brand-beige/90">
+            <div class="glass-panel rounded-full flex justify-between items-center px-4 py-2 transition-all shadow-sm">
                 <a href="#" class="flex items-center group relative z-10">
-                    <div class="w-20 h-20 rounded-full flex items-center justify-center p-0.5 transform transition-transform duration-700 group-hover:scale-105 border border-brand-brown/10 shadow-sm bg-white overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/nalogo.jpg" alt="Σπυριδούλα Μουρτζιάπη Logo" class="w-full h-full object-cover">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white shadow-md flex items-center justify-center p-0.5 transform transition-transform duration-700 group-hover:scale-105 border border-brand-brown/10 overflow-hidden">
+                        <!-- New Big Circular Logo -->
+                        <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/nalogo.jpg" alt="Σπυριδούλα Μουρτζιάπη Logo" class="w-full h-full object-cover rounded-full">
                     </div>
                 </a>
                 
                 <div class="hidden lg:flex items-center space-x-10">
-                    <a href="#about" class="text-sm font-semibold text-brand-brown hover:text-brand-brownLight transition-colors tracking-widest no-accents">Η ΨΥΧΟΛΟΓΟΣ</a>
-                    <a href="#services" class="text-sm font-semibold text-brand-brown hover:text-brand-brownLight transition-colors tracking-widest no-accents">ΥΠΗΡΕΣΙΕΣ</a>
-                    <a href="#philosophy" class="text-sm font-semibold text-brand-brown hover:text-brand-brownLight transition-colors tracking-widest no-accents">ΦΙΛΟΣΟΦΙΑ</a>
-                    <a href="#roadmap" class="text-sm font-semibold text-brand-brown hover:text-brand-brownLight transition-colors tracking-widest no-accents">Η ΠΟΡΕΙΑ</a>
-                    <a href="#faq" class="text-sm font-semibold text-brand-brown hover:text-brand-brownLight transition-colors tracking-widest no-accents">FAQ</a>
-                    <a href="#contact" class="px-8 py-3 bg-brand-brown text-brand-beige rounded-full text-sm font-semibold tracking-widest no-accents hover:bg-brand-brownLight transition-all duration-500 shadow-md hover:shadow-lg">ΡΑΝΤΕΒΟΥ</a>
+                    <a href="#about" class="text-[13px] font-semibold text-brand-brown hover:text-brand-green transition-colors tracking-widest no-accents">Η ΨΥΧΟΛΟΓΟΣ</a>
+                    <a href="#services" class="text-[13px] font-semibold text-brand-brown hover:text-brand-green transition-colors tracking-widest no-accents">ΥΠΗΡΕΣΙΕΣ</a>
+                    <a href="#philosophy" class="text-[13px] font-semibold text-brand-brown hover:text-brand-green transition-colors tracking-widest no-accents">ΦΙΛΟΣΟΦΙΑ</a>
+                    <a href="#roadmap" class="text-[13px] font-semibold text-brand-brown hover:text-brand-green transition-colors tracking-widest no-accents">Η ΠΟΡΕΙΑ</a>
+                    <a href="#faq" class="text-[13px] font-semibold text-brand-brown hover:text-brand-green transition-colors tracking-widest no-accents">FAQ</a>
+                    <a href="#contact" class="px-8 py-3 bg-brand-brown text-brand-beige rounded-full text-[13px] font-semibold tracking-widest no-accents hover:bg-brand-green hover:text-brand-brown transition-all duration-500 shadow-md">ΡΑΝΤΕΒΟΥ</a>
                 </div>
 
                 <button class="lg:hidden text-brand-brown p-2 focus:outline-none" id="mobile-menu-btn">
@@ -183,49 +178,54 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brand-beige/98 backdrop-blur-3xl shadow-2xl hidden flex-col items-center justify-center py-12 space-y-8 border-t border-brand-brown/10 mt-2 text-center">
-            <a href="#about" class="text-lg font-semibold tracking-widest no-accents text-brand-brown mobile-link">Η ΨΥΧΟΛΟΓΟΣ</a>
-            <a href="#services" class="text-lg font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΥΠΗΡΕΣΙΕΣ</a>
-            <a href="#philosophy" class="text-lg font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΦΙΛΟΣΟΦΙΑ</a>
-            <a href="#roadmap" class="text-lg font-semibold tracking-widest no-accents text-brand-brown mobile-link">Η ΠΟΡΕΙΑ</a>
-            <a href="#faq" class="text-lg font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</a>
-            <a href="#reviews" class="text-lg font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΑΞΙΟΛΟΓΗΣΕΙΣ</a>
-            <a href="#contact" class="px-10 py-4 bg-brand-brown text-brand-beige rounded-full text-lg font-semibold tracking-widest no-accents mobile-link shadow-lg">ΡΑΝΤΕΒΟΥ</a>
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brand-beige/98 backdrop-blur-3xl shadow-2xl hidden flex-col items-center py-12 space-y-8 border-t border-brand-brown/10 mt-2">
+            <a href="#about" class="text-base font-semibold tracking-widest no-accents text-brand-brown mobile-link">Η ΨΥΧΟΛΟΓΟΣ</a>
+            <a href="#services" class="text-base font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΥΠΗΡΕΣΙΕΣ</a>
+            <a href="#philosophy" class="text-base font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΦΙΛΟΣΟΦΙΑ</a>
+            <a href="#roadmap" class="text-base font-semibold tracking-widest no-accents text-brand-brown mobile-link">Η ΠΟΡΕΙΑ</a>
+            <a href="#faq" class="text-base font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</a>
+            <a href="#reviews" class="text-base font-semibold tracking-widest no-accents text-brand-brown mobile-link">ΑΞΙΟΛΟΓΗΣΕΙΣ</a>
+            <a href="#contact" class="px-10 py-4 bg-brand-brown text-brand-beige rounded-full text-sm font-semibold tracking-widest no-accents mobile-link shadow-lg">ΡΑΝΤΕΒΟΥ</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-[100svh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+    <!-- Centered Hero Section -->
+    <section class="relative min-h-[100svh] flex items-center justify-center pt-40 pb-20 px-6 overflow-hidden">
         
-        <!-- Watercolor Leaves in Corners -->
-        <div class="leaf-bg leaf-top-left animate-float"></div>
-        <div class="leaf-bg leaf-bottom-right animate-float-delayed"></div>
+        <!-- Animated Parallax Leaves -->
+        <div class="absolute top-10 md:top-20 left-[-5%] z-0 parallax-wrapper pointer-events-none" data-speed="0.2">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leves.jpg" class="w-64 md:w-96 watercolor-leaf animate-leaf-float" alt="Watercolor Leaf">
+        </div>
+        <div class="absolute bottom-10 right-[-5%] z-0 parallax-wrapper pointer-events-none" data-speed="-0.15">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leavsactujals.jpg" class="w-72 md:w-[28rem] watercolor-leaf animate-leaf-float-delayed transform -scale-x-100" alt="Watercolor Leaf">
+        </div>
 
-        <div class="max-w-5xl mx-auto w-full relative z-20 text-center flex flex-col items-center justify-center reveal mt-10">
+        <div class="max-w-5xl mx-auto w-full relative z-20 text-center flex flex-col items-center reveal mt-10">
             
-            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-brand-brown/20 bg-brand-beige/60 backdrop-blur-md shadow-sm text-brand-brown text-sm font-semibold mb-8 tracking-widest no-accents">
-                <span class="w-2 h-2 rounded-full bg-brand-brown animate-pulse"></span>
-                ΔΙΑΔΙΚΤΥΑΚΕΣ ΣΥΝΕΔΡΙΕΣ
+            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-brand-brown/20 bg-white/40 backdrop-blur-md shadow-sm text-brand-brown text-[11px] font-bold mb-8 tracking-widest no-accents">
+                <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+                100% ONLINE ΣΥΝΕΔΡΙΕΣ
             </div>
             
-            <h1 class="text-5xl md:text-7xl lg:text-[5rem] font-serif text-brand-brown leading-[1.1] mb-6 text-balance drop-shadow-sm">
+            <h1 class="text-5xl md:text-6xl lg:text-[5rem] font-serif text-brand-brown leading-[1.1] mb-6 text-balance drop-shadow-sm font-medium">
                 Ψυχοθεραπεία με σεβασμό στη <br>
-                <span class="italic font-light">μοναδικότητα κάθε ανθρώπου</span>
+                <span class="italic pr-2 text-brand-lightbrown font-light">μοναδικότητα κάθε ανθρώπου</span>
             </h1>
 
-            <h2 class="text-xl md:text-3xl text-brand-brownLight font-medium tracking-wide mb-8">
+            <h2 class="text-xl md:text-3xl text-brand-brown font-medium tracking-wide mb-8 italic">
                 Συνθετική Ψυχοθεραπεία & Κλινική Νευροψυχολογία
             </h2>
             
-            <p class="text-lg md:text-2xl text-brand-brown max-w-3xl mx-auto font-light leading-relaxed mb-12 text-balance opacity-90">
+            <p class="text-lg md:text-2xl text-brand-lightbrown max-w-3xl mx-auto font-light leading-relaxed mb-12 text-balance">
                 Η ψυχοθεραπεία αποτελεί έναν χώρο κατανόησης, επεξεργασίας και προσωπικής ανάπτυξης. Μέσα από μια σχέση εμπιστοσύνης και συνεργασίας, δίνεται η δυνατότητα να διερευνηθούν δυσκολίες, συναισθήματα και μοτίβα που επηρεάζουν την καθημερινότητα, τις σχέσεις και την ποιότητα ζωής.
             </p>
             
-            <!-- Elegant Button -->
-            <a href="#contact" class="px-12 py-5 bg-brand-brown text-brand-beige rounded-full font-semibold transition-all duration-500 shadow-md hover:shadow-xl flex items-center justify-center gap-4 group text-sm tracking-widest no-accents border border-brand-brownLight hover:bg-brand-brownLight">
+            <!-- Elegant CTA Button -->
+            <a href="#contact" class="relative px-12 py-5 bg-brand-brown text-brand-beige rounded-full font-bold transition-all duration-500 shadow-luxury hover:bg-brand-green hover:text-brand-brown flex items-center justify-center gap-4 group text-xs tracking-widest no-accents overflow-hidden border border-brand-brown/10">
+                <span class="shimmer"></span>
                 <span class="relative z-10 flex items-center gap-4">
                     ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ
-                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500"></i>
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform duration-500"></i>
                 </span>
             </a>
             
@@ -234,34 +234,40 @@
 
     <!-- About Section -->
     <section id="about" class="py-24 px-6 relative z-10 border-t border-brand-brown/10">
-        <div class="leaf-bg leaf-bottom-left animate-float"></div>
-        
-        <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+        <!-- Parallax Leaves -->
+        <div class="absolute top-1/4 right-[-10%] z-0 parallax-wrapper pointer-events-none" data-speed="0.1">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leves.jpg" class="w-80 watercolor-leaf animate-leaf-float" alt="Leaf">
+        </div>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-20 items-center relative z-10">
             
-            <div class="w-full max-w-3xl reveal">
-                <span class="text-brand-brownLight font-semibold tracking-widest text-sm no-accents mb-6 block">ΓΝΩΡΙΣΤΕ ΤΗΝ ΨΥΧΟΛΟΓΟ</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-12 leading-[1.1] text-balance">
-                    Σπυριδούλα Μουρτζιάπη
+            <!-- New Her Image -->
+            <div class="lg:col-span-5 relative reveal lg:translate-y-12">
+                <div class="relative z-10 img-wrapper rounded-[2.5rem] shadow-luxury p-3 glass-panel border-white/50 bg-white/40">
+                    <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/herrrr.jpg" alt="Σπυριδούλα Μουρτζιάπη - Συνθετική Ψυχοθεραπεύτρια" class="w-full h-auto object-cover rounded-[2rem]">
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 reveal reveal-delay-2">
+                <span class="text-brand-lightbrown font-bold tracking-widest text-[11px] no-accents mb-6 block">ΣΠΥΡΙΔΟΥΛΑ ΜΟΥΡΤΖΙΑΠΗ</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-10 leading-[1.1] text-balance">
+                    Γνωρίστε την<br><span class="italic font-light text-brand-lightbrown">Ψυχολόγο</span>
                 </h2>
                 
-                <div class="relative z-10 img-wrapper rounded-full shadow-luxury p-3 elegant-card border-brand-brown/20 w-64 h-64 md:w-80 md:h-80 mx-auto mb-12">
-                    <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/herrrr.jpg" alt="Σπυριδούλα Μουρτζιάπη - Συνθετική Ψυχοθεραπεύτρια" class="w-full h-full object-cover rounded-full">
-                </div>
-
-                <div class="space-y-6 text-brand-brown text-xl leading-relaxed font-light opacity-90 text-center flex flex-col items-center">
-                    <p class="max-w-4xl">
+                <div class="space-y-6 text-brand-lightbrown text-xl leading-relaxed font-light">
+                    <p>
                         Η <strong>Σπυριδούλα Μουρτζιάπη</strong> είναι αδειούχος Ψυχολόγος και Συνθετική Ψυχοθεραπεύτρια, με μεταπτυχιακή εξειδίκευση (MSc) στην Κλινική Νευροψυχολογία.
                     </p>
-                    <p class="max-w-4xl">
+                    <p>
                         Η θεραπευτική της προσέγγιση βασίζεται στην εξατομίκευση, αναγνωρίζοντας ότι κάθε άνθρωπος έχει τη δική του ιστορία, τις δικές του ανάγκες και τον δικό του τρόπο να βιώνει τον κόσμο.
                     </p>
-                    <p class="max-w-4xl">
+                    <p>
                         Μέσα από τη συνθετική ψυχοθεραπεία, αξιοποιούνται στοιχεία από διαφορετικές θεραπευτικές προσεγγίσεις, με βασικούς άξονες τη <strong>Γνωσιακή Συμπεριφορική Θεραπεία (CBT)</strong> και τη <strong>Θεραπεία Gestalt</strong>, ώστε η θεραπευτική διαδικασία να προσαρμόζεται στις ανάγκες του κάθε θεραπευόμενου.
                     </p>
-                    <p class="max-w-4xl">
+                    <p>
                         Η επαγγελματική της εμπειρία περιλαμβάνει ατομική ψυχοθεραπεία, συμβουλευτική γονέων, συντονισμό ομάδων εφήβων, καθώς και συνεργασία με σχολεία, ΚΑΠΗ και δομές ΑμεΑ.
                     </p>
-                    <p class="max-w-4xl">
+                    <p>
                         Στόχος είναι η δημιουργία ενός ασφαλούς και υποστηρικτικού πλαισίου, μέσα στο οποίο ο θεραπευόμενος μπορεί να κατανοήσει βαθύτερα τον εαυτό του, να ενισχύσει την ψυχική του ανθεκτικότητα και να διαχειριστεί αποτελεσματικότερα τις προκλήσεις της ζωής.
                     </p>
                 </div>
@@ -270,71 +276,75 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-32 px-6 relative overflow-hidden border-t border-brand-brown/10">
-        <div class="leaf-bg leaf-top-right animate-float-delayed"></div>
-        <div class="leaf-bg leaf-bottom-left animate-float"></div>
+    <section id="services" class="py-32 px-6 relative overflow-hidden">
+        <!-- Parallax Leaves -->
+        <div class="absolute top-10 left-[-5%] z-0 parallax-wrapper pointer-events-none" data-speed="-0.1">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leavsactujals.jpg" class="w-72 watercolor-leaf animate-leaf-float-delayed" alt="Leaf">
+        </div>
+        <div class="absolute bottom-10 right-[-5%] z-0 parallax-wrapper pointer-events-none" data-speed="0.15">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leves.jpg" class="w-80 watercolor-leaf animate-leaf-float transform rotate-45" alt="Leaf">
+        </div>
 
-        <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-20 reveal">
-                <span class="text-brand-brownLight font-semibold tracking-widest text-sm uppercase no-accents mb-6 block">ΤΟΜΕΙΣ ΠΑΡΕΜΒΑΣΗΣ</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-8 text-balance">Πώς μπορεί να βοηθήσει η ψυχοθεραπεία</h2>
-                <div class="w-16 h-px bg-brand-brownLight mx-auto"></div>
+                <h2 class="text-4xl md:text-5xl lg:text-5xl font-serif text-brand-brown mb-6">Πώς μπορεί να βοηθήσει η ψυχοθεραπεία</h2>
+                <div class="w-16 h-px bg-brand-brown/30 mx-auto"></div>
             </div>
 
-            <!-- Fully Centered Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 w-full">
+            <!-- Grid Layout for 5 Items: 3 on top, 2 on bottom -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-10">
                 
                 <!-- Service 1 -->
-                <div class="elegant-card p-12 rounded-[2rem] text-center flex flex-col items-center reveal">
-                    <div class="w-14 h-14 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10">
-                        <i data-lucide="cloud-rain" class="w-6 h-6 text-brand-brownLight stroke-[1.5]"></i>
+                <div class="lg:col-span-2 glass-card p-10 rounded-[2rem] group reveal">
+                    <div class="w-12 h-12 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10 group-hover:bg-brand-brown/10 transition-colors">
+                        <i data-lucide="cloud-rain" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
                     </div>
-                    <h3 class="text-3xl font-serif text-brand-brown mb-6 leading-tight">Άγχος, καταθλιπτική διάθεση και ψυχική επιβάρυνση</h3>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">
+                    <h3 class="text-2xl font-serif text-brand-brown mb-4 leading-tight font-medium">Άγχος, καταθλιπτική διάθεση και ψυχική επιβάρυνση</h3>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-lg">
                         Όταν το άγχος, η συναισθηματική δυσφορία ή δύσκολες εμπειρίες επηρεάζουν την καθημερινή λειτουργικότητα, η θεραπεία προσφέρει χώρο για κατανόηση, επεξεργασία και ανάπτυξη νέων τρόπων διαχείρισης.
                     </p>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="elegant-card p-12 rounded-[2rem] text-center flex flex-col items-center reveal reveal-delay-1">
-                    <div class="w-14 h-14 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-brand-brownLight stroke-[1.5]"></i>
+                <div class="lg:col-span-2 glass-card p-10 rounded-[2rem] group reveal reveal-delay-1">
+                    <div class="w-12 h-12 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10 group-hover:bg-brand-brown/10 transition-colors">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
                     </div>
-                    <h3 class="text-3xl font-serif text-brand-brown mb-6 leading-tight">Αυτοεκτίμηση, όρια και διαπροσωπικές σχέσεις</h3>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">
+                    <h3 class="text-2xl font-serif text-brand-brown mb-4 leading-tight font-medium">Αυτοεκτίμηση, όρια και διαπροσωπικές σχέσεις</h3>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-lg">
                         Η θεραπευτική διαδικασία μπορεί να βοηθήσει στην ενίσχυση της αυτοεκτίμησης, στη βελτίωση της επικοινωνίας και στην ανάπτυξη πιο υγιών ορίων στις προσωπικές και επαγγελματικές σχέσεις.
                     </p>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="elegant-card p-12 rounded-[2rem] text-center flex flex-col items-center reveal">
-                    <div class="w-14 h-14 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10">
-                        <i data-lucide="arrow-right-left" class="w-6 h-6 text-brand-brownLight stroke-[1.5]"></i>
+                <div class="lg:col-span-2 glass-card p-10 rounded-[2rem] group reveal reveal-delay-2">
+                    <div class="w-12 h-12 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10 group-hover:bg-brand-brown/10 transition-colors">
+                        <i data-lucide="arrow-right-left" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
                     </div>
-                    <h3 class="text-3xl font-serif text-brand-brown mb-6 leading-tight">Μεταβάσεις και αλλαγές ζωής</h3>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">
+                    <h3 class="text-2xl font-serif text-brand-brown mb-4 leading-tight font-medium">Μεταβάσεις και αλλαγές ζωής</h3>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-lg">
                         Περίοδοι όπως ένας χωρισμός, μια απώλεια, η γονεϊκότητα, μια επαγγελματική αλλαγή ή άλλες σημαντικές μεταβάσεις συχνά συνοδεύονται από αβεβαιότητα. Η ψυχοθεραπεία λειτουργεί ως σταθερό σημείο αναφοράς.
                     </p>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="elegant-card p-12 rounded-[2rem] text-center flex flex-col items-center reveal reveal-delay-1">
-                    <div class="w-14 h-14 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10">
-                        <i data-lucide="users" class="w-6 h-6 text-brand-brownLight stroke-[1.5]"></i>
+                <div class="lg:col-span-3 glass-card p-10 rounded-[2rem] group reveal">
+                    <div class="w-12 h-12 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10 group-hover:bg-brand-brown/10 transition-colors">
+                        <i data-lucide="users" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
                     </div>
-                    <h3 class="text-3xl font-serif text-brand-brown mb-6 leading-tight">Εφηβεία και συμβουλευτική γονέων</h3>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">
+                    <h3 class="text-2xl font-serif text-brand-brown mb-4 leading-tight font-medium">Εφηβεία και συμβουλευτική γονέων</h3>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-lg">
                         Παρέχεται υποστήριξη σε εφήβους που αντιμετωπίζουν συναισθηματικές, κοινωνικές ή αναπτυξιακές δυσκολίες, καθώς και συμβουλευτική γονέων με στόχο την ενίσχυση της επικοινωνίας και της σύνδεσης μέσα στην οικογένεια.
                     </p>
                 </div>
 
-                <!-- Service 5 (Centered Full Width) -->
-                <div class="md:col-span-2 elegant-card p-12 rounded-[2rem] text-center flex flex-col items-center reveal mx-auto max-w-4xl">
-                    <div class="w-14 h-14 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10">
-                        <i data-lucide="laptop" class="w-6 h-6 text-brand-brownLight stroke-[1.5]"></i>
+                <!-- Service 5 -->
+                <div class="lg:col-span-3 glass-card p-10 rounded-[2rem] group reveal reveal-delay-1">
+                    <div class="w-12 h-12 rounded-full bg-brand-brown/5 flex items-center justify-center mb-8 border border-brand-brown/10 group-hover:bg-brand-brown/10 transition-colors">
+                        <i data-lucide="laptop" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
                     </div>
-                    <h3 class="text-3xl font-serif text-brand-brown mb-6 leading-tight">Διαδικτυακές συνεδρίες</h3>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">
+                    <h3 class="text-2xl font-serif text-brand-brown mb-4 leading-tight font-medium">Διαδικτυακές συνεδρίες</h3>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-lg">
                         Όλες οι συνεδρίες πραγματοποιούνται διαδικτυακά, μέσω ασφαλούς βιντεοκλήσης, προσφέροντας ευελιξία, προσβασιμότητα και υψηλό επίπεδο εχεμύθειας.
                     </p>
                 </div>
@@ -345,42 +355,47 @@
 
     <!-- Philosophy Section -->
     <section id="philosophy" class="py-32 px-6 relative border-t border-brand-brown/10">
-        <div class="leaf-bg leaf-top-left animate-float"></div>
+        <!-- Parallax Leaves -->
+        <div class="absolute top-1/3 left-[-8%] z-0 parallax-wrapper pointer-events-none" data-speed="0.08">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leavsactujals.jpg" class="w-80 watercolor-leaf animate-leaf-float transform -scale-x-100 rotate-12" alt="Leaf">
+        </div>
 
-        <div class="max-w-7xl mx-auto flex flex-col items-center">
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-24 reveal">
-                <span class="text-brand-brownLight font-semibold tracking-widest text-sm uppercase no-accents mb-6 block">Η ΠΡΟΣΕΓΓΙΣΗ ΜΑΣ</span>
                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-8">Θεραπευτική Φιλοσοφία</h2>
-                <div class="w-16 h-px bg-brand-brownLight mx-auto"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-10 text-center w-full">
+            <div class="grid md:grid-cols-2 gap-10">
                 
-                <div class="elegant-card p-12 rounded-[2rem] flex flex-col items-center reveal">
-                    <i data-lucide="network" class="w-10 h-10 text-brand-brown mb-8 stroke-[1.5]"></i>
-                    <p class="text-brand-brown font-light leading-relaxed text-2xl text-balance">
+                <div class="relative p-10 glass-card rounded-[2rem] group reveal">
+                    <i data-lucide="network" class="w-8 h-8 text-brand-green mb-6 stroke-[1.5]"></i>
+                    <h4 class="text-2xl font-serif text-brand-brown mb-4 leading-snug font-medium">Ο Άνθρωπος ως Σύνολο</h4>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-xl">
                         Η ψυχική υγεία διαμορφώνεται από την αλληλεπίδραση πολλών παραγόντων: των εμπειριών μας, των σχέσεών μας, του τρόπου που σκεφτόμαστε, των συναισθημάτων μας και του περιβάλλοντος μέσα στο οποίο ζούμε.
                     </p>
                 </div>
 
-                <div class="elegant-card p-12 rounded-[2rem] flex flex-col items-center reveal reveal-delay-1">
-                    <i data-lucide="eye" class="w-10 h-10 text-brand-brownLight mb-8 stroke-[1.5]"></i>
-                    <p class="text-brand-brown font-light leading-relaxed text-2xl text-balance">
-                        Για τον λόγο αυτό, η θεραπεία δεν εστιάζει μόνο στο σύμπτωμα αλλά στον άνθρωπο ως σύνολο.
+                <div class="relative p-10 glass-card rounded-[2rem] group reveal reveal-delay-1">
+                    <i data-lucide="eye" class="w-8 h-8 text-brand-brown mb-6 stroke-[1.5]"></i>
+                    <h4 class="text-2xl font-serif text-brand-brown mb-4 leading-snug font-medium">Πέρα από το Σύμπτωμα</h4>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-xl">
+                        Για τον λόγο αυτό, η θεραπεία δεν εστιάζει μόνο στο σύμπτωμα αλλά στον άνθρωπο ως σύνολο, προσπαθώντας να κατανοήσει την ευρύτερη εικόνα και τις βαθύτερες ανάγκες του.
                     </p>
                 </div>
 
-                <div class="elegant-card p-12 rounded-[2rem] flex flex-col items-center reveal">
-                    <i data-lucide="layers" class="w-10 h-10 text-brand-brownLight mb-8 stroke-[1.5]"></i>
-                    <p class="text-brand-brown font-light leading-relaxed text-2xl text-balance">
+                <div class="relative p-10 glass-card rounded-[2rem] group reveal">
+                    <i data-lucide="layers" class="w-8 h-8 text-brand-brown mb-6 stroke-[1.5]"></i>
+                    <h4 class="text-2xl font-serif text-brand-brown mb-4 leading-snug font-medium">Επιστήμη & Μοναδικότητα</h4>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-xl">
                         Η συνθετική προσέγγιση επιτρέπει την αξιοποίηση διαφορετικών θεραπευτικών εργαλείων, συνδυάζοντας τη σύγχρονη επιστημονική γνώση με τον σεβασμό στη μοναδικότητα κάθε ανθρώπου.
                     </p>
                 </div>
 
-                <div class="elegant-card p-12 rounded-[2rem] flex flex-col items-center reveal reveal-delay-1">
-                    <i data-lucide="puzzle" class="w-10 h-10 text-brand-brown mb-8 stroke-[1.5]"></i>
-                    <p class="text-brand-brown font-light leading-relaxed text-2xl text-balance">
-                        Η θεραπεία προσαρμόζεται στον θεραπευόμενο και όχι ο θεραπευόμενος στη θεραπεία.
+                <div class="relative p-10 glass-card rounded-[2rem] group reveal reveal-delay-1">
+                    <i data-lucide="puzzle" class="w-8 h-8 text-brand-green mb-6 stroke-[1.5]"></i>
+                    <h4 class="text-2xl font-serif text-brand-brown mb-4 leading-snug font-medium">Απόλυτη Προσαρμοστικότητα</h4>
+                    <p class="text-brand-lightbrown font-light leading-relaxed text-xl">
+                        Η θεραπεία προσαρμόζεται στον θεραπευόμενο και όχι ο θεραπευόμενος στη θεραπεία. Κάθε βήμα σχεδιάζεται αποκλειστικά γύρω από τις δικές σας προσωπικές ανάγκες και ρυθμούς.
                     </p>
                 </div>
 
@@ -389,43 +404,69 @@
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-32 px-6 relative overflow-hidden border-t border-brand-brown/10">
-        <div class="leaf-bg leaf-bottom-right animate-float-delayed"></div>
+    <section id="roadmap" class="py-32 px-6 relative border-t border-brand-brown/10">
+        <!-- Parallax Leaves -->
+        <div class="absolute top-1/4 right-[-5%] z-0 parallax-wrapper pointer-events-none" data-speed="-0.12">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leves.jpg" class="w-72 watercolor-leaf animate-leaf-float-delayed transform rotate-[-20deg]" alt="Leaf">
+        </div>
         
-        <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
+        <div class="max-w-5xl mx-auto relative z-10">
             <div class="text-center mb-24 reveal">
-                <span class="text-brand-brownLight font-semibold tracking-widest text-sm uppercase no-accents mb-6 block">ΤΑ ΒΗΜΑΤΑ</span>
                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-8">Η πορεία της θεραπείας</h2>
-                <div class="w-16 h-px bg-brand-brownLight mx-auto"></div>
             </div>
 
-            <div class="space-y-12 w-full">
-                <!-- Step 1 -->
-                <div class="elegant-card p-10 rounded-[2rem] flex flex-col items-center text-center reveal">
-                    <div class="w-16 h-16 rounded-full bg-brand-brown text-brand-beige flex items-center justify-center mb-6 text-2xl font-serif">1</div>
-                    <h4 class="text-3xl font-serif text-brand-brown mb-4">Επικοινωνία και προγραμματισμός συνεδρίας</h4>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">Το πρώτο βήμα είναι η επικοινωνία και ο προγραμματισμός της πρώτης διαδικτυακής συνάντησης.</p>
-                </div>
+            <div class="relative">
+                <!-- Vertical Line (Desktop) -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-brown/10 via-brand-brown/30 to-transparent transform -translate-x-1/2"></div>
 
-                <!-- Step 2 -->
-                <div class="elegant-card p-10 rounded-[2rem] flex flex-col items-center text-center reveal">
-                    <div class="w-16 h-16 rounded-full bg-brand-brown text-brand-beige flex items-center justify-center mb-6 text-2xl font-serif">2</div>
-                    <h4 class="text-3xl font-serif text-brand-brown mb-4">Αρχική διερεύνηση</h4>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">Κατά τις πρώτες συνεδρίες διερευνώνται οι ανάγκες, οι δυσκολίες και οι στόχοι του θεραπευόμενου, ώστε να διαμορφωθεί μια ολοκληρωμένη εικόνα του αιτήματος.</p>
-                </div>
+                <div class="space-y-16">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between reveal group">
+                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-8 md:mb-0">
+                            <h4 class="text-2xl font-serif text-brand-brown mb-4 group-hover:text-brand-green transition-colors font-medium">1. Επικοινωνία και προγραμματισμός συνεδρίας</h4>
+                            <p class="text-brand-lightbrown font-light leading-relaxed text-xl">Το πρώτο βήμα είναι η επικοινωνία και ο προγραμματισμός της πρώτης διαδικτυακής συνάντησης.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-brand-beige border border-brand-brown/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-md">
+                            <span class="w-3 h-3 rounded-full bg-brand-brown"></span>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
 
-                <!-- Step 3 -->
-                <div class="elegant-card p-10 rounded-[2rem] flex flex-col items-center text-center reveal">
-                    <div class="w-16 h-16 rounded-full bg-brand-brown text-brand-beige flex items-center justify-center mb-6 text-2xl font-serif">3</div>
-                    <h4 class="text-3xl font-serif text-brand-brown mb-4">Εξατομικευμένο θεραπευτικό πλάνο</h4>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">Η θεραπευτική διαδικασία σχεδιάζεται με βάση τις ιδιαίτερες ανάγκες, τα χαρακτηριστικά και τους στόχους κάθε ανθρώπου.</p>
-                </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col md:flex-row-reverse items-center justify-between reveal reveal-delay-1 group">
+                        <div class="md:w-[45%] text-center md:text-left pl-0 md:pl-12 mb-8 md:mb-0">
+                            <h4 class="text-2xl font-serif text-brand-brown mb-4 group-hover:text-brand-green transition-colors font-medium">2. Αρχική διερεύνηση</h4>
+                            <p class="text-brand-lightbrown font-light leading-relaxed text-xl">Κατά τις πρώτες συνεδρίες διερευνώνται οι ανάγκες, οι δυσκολίες και οι στόχοι του θεραπευόμενου, ώστε να διαμορφωθεί μια ολοκληρωμένη εικόνα του αιτήματος.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-brand-beige border border-brand-brown/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-md">
+                            <span class="w-3 h-3 rounded-full bg-brand-brown"></span>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
 
-                <!-- Step 4 -->
-                <div class="elegant-card p-10 rounded-[2rem] flex flex-col items-center text-center reveal">
-                    <div class="w-16 h-16 rounded-full bg-brand-brown text-brand-beige flex items-center justify-center mb-6 text-2xl font-serif">4</div>
-                    <h4 class="text-3xl font-serif text-brand-brown mb-4">Αυτογνωσία, εξέλιξη και αλλαγή</h4>
-                    <p class="text-brand-brownLight font-light leading-relaxed text-lg">Μέσα από τη θεραπεία καλλιεργείται μεγαλύτερη επίγνωση του εαυτού, ενισχύεται η δυνατότητα διαχείρισης των δυσκολιών και δημιουργούνται οι προϋποθέσεις για ουσιαστική και διαρκή αλλαγή.</p>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between reveal reveal-delay-2 group">
+                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-8 md:mb-0">
+                            <h4 class="text-2xl font-serif text-brand-brown mb-4 group-hover:text-brand-green transition-colors font-medium">3. Εξατομικευμένο θεραπευτικό πλάνο</h4>
+                            <p class="text-brand-lightbrown font-light leading-relaxed text-xl">Η θεραπευτική διαδικασία σχεδιάζεται με βάση τις ιδιαίτερες ανάγκες, τα χαρακτηριστικά και τους στόχους κάθε ανθρώπου.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-brand-beige border border-brand-brown/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-md">
+                            <span class="w-3 h-3 rounded-full bg-brand-brown"></span>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col md:flex-row-reverse items-center justify-between reveal reveal-delay-1 group">
+                        <div class="md:w-[45%] text-center md:text-left pl-0 md:pl-12">
+                            <h4 class="text-2xl font-serif text-brand-brown mb-4 group-hover:text-brand-green transition-colors font-medium">4. Αυτογνωσία, εξέλιξη και αλλαγή</h4>
+                            <p class="text-brand-lightbrown font-light leading-relaxed text-xl">Μέσα από τη θεραπεία καλλιεργείται μεγαλύτερη επίγνωση του εαυτού, ενισχύεται η δυνατότητα διαχείρισης των δυσκολιών και δημιουργούνται οι προϋποθέσεις για ουσιαστική και διαρκή αλλαγή.</p>
+                        </div>
+                        <div class="relative z-10 w-12 h-12 rounded-full bg-brand-brown flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-luxury">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-beige"></i>
+                        </div>
+                        <div class="md:w-[45%] hidden md:block"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -433,48 +474,58 @@
 
     <!-- FAQ Section -->
     <section id="faq" class="py-32 px-6 relative z-10 border-t border-brand-brown/10">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
+        <!-- Parallax Leaves -->
+        <div class="absolute top-10 left-[-8%] z-0 parallax-wrapper pointer-events-none" data-speed="0.1">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leavsactujals.jpg" class="w-80 watercolor-leaf animate-leaf-float transform rotate-180" alt="Leaf">
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
             <div class="text-center mb-20 reveal">
-                <span class="text-brand-brownLight font-semibold tracking-widest text-sm uppercase no-accents mb-6 block">FAQ</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-8">Συχνές Ερωτήσεις</h2>
-                <div class="w-16 h-px bg-brand-brownLight mx-auto"></div>
+                <span class="text-brand-lightbrown font-bold tracking-widest text-[11px] no-accents mb-6 block">FAQ</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-brand-brown mb-8">Συχνές Ερωτήσεις</h2>
             </div>
 
-            <div class="space-y-6 w-full text-center">
+            <div class="space-y-6">
                 <!-- FAQ Item 1 -->
-                <div class="elegant-card rounded-[1.5rem] overflow-hidden reveal">
-                    <button class="faq-btn w-full px-8 py-8 text-center flex flex-col items-center justify-center focus:outline-none group gap-4">
-                        <span class="text-2xl font-serif text-brand-brown transition-colors">Πού γίνονται οι συνεδρίες;</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-brand-brownLight transition-transform duration-300"></i>
+                <div class="glass-card rounded-[1.5rem] overflow-hidden reveal">
+                    <button class="faq-btn w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="text-xl font-serif font-medium text-brand-brown group-hover:text-brand-green transition-colors">Πού γίνονται οι συνεδρίες;</span>
+                        <div class="w-8 h-8 rounded-full border border-brand-brown/20 flex items-center justify-center shrink-0 bg-white/40 group-hover:bg-brand-brown/5 transition-colors">
+                            <i data-lucide="plus" class="faq-icon w-4 h-4 text-brand-brown transition-transform duration-300"></i>
+                        </div>
                     </button>
-                    <div class="faq-content">
-                        <p class="px-8 pb-10 text-brand-brownLight font-light leading-relaxed text-lg">
+                    <div class="faq-content bg-white/20">
+                        <p class="px-8 pb-8 text-brand-lightbrown font-light leading-relaxed text-lg">
                             Το γραφείο λειτουργεί αποκλειστικά διαδικτυακά (100% online). Όλες οι συνεδρίες διεξάγονται μέσω ασφαλούς βιντεοκλήσης, προσφέροντας ευελιξία, προσβασιμότητα και υψηλό επίπεδο εχεμύθειας.
                         </p>
                     </div>
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="elegant-card rounded-[1.5rem] overflow-hidden reveal reveal-delay-1">
-                    <button class="faq-btn w-full px-8 py-8 text-center flex flex-col items-center justify-center focus:outline-none group gap-4">
-                        <span class="text-2xl font-serif text-brand-brown transition-colors">Πόσο διαρκεί η κάθε συνεδρία;</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-brand-brownLight transition-transform duration-300"></i>
+                <div class="glass-card rounded-[1.5rem] overflow-hidden reveal reveal-delay-1">
+                    <button class="faq-btn w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="text-xl font-serif font-medium text-brand-brown group-hover:text-brand-green transition-colors">Πόσο διαρκεί η κάθε συνεδρία;</span>
+                        <div class="w-8 h-8 rounded-full border border-brand-brown/20 flex items-center justify-center shrink-0 bg-white/40 group-hover:bg-brand-brown/5 transition-colors">
+                            <i data-lucide="plus" class="faq-icon w-4 h-4 text-brand-brown transition-transform duration-300"></i>
+                        </div>
                     </button>
-                    <div class="faq-content">
-                        <p class="px-8 pb-10 text-brand-brownLight font-light leading-relaxed text-lg">
+                    <div class="faq-content bg-white/20">
+                        <p class="px-8 pb-8 text-brand-lightbrown font-light leading-relaxed text-lg">
                             Η ατομική συνεδρία, καθώς και η συνεδρία εφήβων ή συμβουλευτικής γονέων, έχει διάρκεια 50 λεπτά. Αυτός ο χρόνος θεωρείται ο βέλτιστος για να διατηρείται η συγκέντρωση και να υπάρχει ωφέλιμη επεξεργασία.
                         </p>
                     </div>
                 </div>
 
                 <!-- FAQ Item 3 -->
-                <div class="elegant-card rounded-[1.5rem] overflow-hidden reveal reveal-delay-2">
-                    <button class="faq-btn w-full px-8 py-8 text-center flex flex-col items-center justify-center focus:outline-none group gap-4">
-                        <span class="text-2xl font-serif text-brand-brown transition-colors">Τι είναι η Συνθετική Ψυχοθεραπεία;</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-brand-brownLight transition-transform duration-300"></i>
+                <div class="glass-card rounded-[1.5rem] overflow-hidden reveal reveal-delay-2">
+                    <button class="faq-btn w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="text-xl font-serif font-medium text-brand-brown group-hover:text-brand-green transition-colors">Τι είναι η Συνθετική Ψυχοθεραπεία;</span>
+                        <div class="w-8 h-8 rounded-full border border-brand-brown/20 flex items-center justify-center shrink-0 bg-white/40 group-hover:bg-brand-brown/5 transition-colors">
+                            <i data-lucide="plus" class="faq-icon w-4 h-4 text-brand-brown transition-transform duration-300"></i>
+                        </div>
                     </button>
-                    <div class="faq-content">
-                        <p class="px-8 pb-10 text-brand-brownLight font-light leading-relaxed text-lg">
+                    <div class="faq-content bg-white/20">
+                        <p class="px-8 pb-8 text-brand-lightbrown font-light leading-relaxed text-lg">
                             Είναι μια προσέγγιση που αξιοποιεί στοιχεία από διαφορετικές θεραπευτικές μεθόδους, με βασικούς άξονες τη Γνωσιακή Συμπεριφορική Θεραπεία (CBT) και τη Θεραπεία Gestalt, ώστε να προσαρμόζεται απόλυτα στις ανάγκες σας.
                         </p>
                     </div>
@@ -485,176 +536,200 @@
 
     <!-- Reviews Section -->
     <section id="reviews" class="py-32 relative overflow-hidden border-t border-brand-brown/10">
-        <div class="leaf-bg leaf-top-left animate-float"></div>
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10 text-center lg:text-left">
+        <!-- Parallax Leaves -->
+        <div class="absolute bottom-[-10%] right-[-5%] z-0 parallax-wrapper pointer-events-none" data-speed="-0.15">
+            <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/leves.jpg" class="w-96 watercolor-leaf animate-leaf-float transform rotate-[-45deg]" alt="Leaf">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
             
-            <div class="reveal flex flex-col items-center lg:items-start">
-                <span class="text-brand-brownLight font-semibold tracking-widest text-sm uppercase no-accents mb-6 block">ΕΜΠΕΙΡΙΕΣ ΘΕΡΑΠΕΥΟΜΕΝΩΝ</span>
+            <div class="reveal">
+                <span class="text-brand-lightbrown font-bold tracking-widest text-[11px] no-accents mb-6 block">ΕΜΠΕΙΡΙΕΣ ΘΕΡΑΠΕΥΟΜΕΝΩΝ</span>
                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-brown mb-8 leading-[1.1]">Η Δύναμη της<br><span class="italic font-light">Εμπιστοσύνης</span></h2>
-                <p class="text-brand-brownLight text-xl font-light mb-12 max-w-md leading-relaxed">
+                <p class="text-brand-lightbrown text-xl font-light mb-12 max-w-md leading-relaxed">
                     Διαβάστε τι λένε οι άνθρωποι που μας εμπιστεύτηκαν το ταξίδι της ψυχικής τους υγείας.
                 </p>
-                <a href="https://www.doctoranytime.gr/d/Psychologos/mourtziapi-spyridoula" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-10 py-5 elegant-card rounded-full text-sm font-semibold text-brand-brown tracking-widest no-accents group">
+                <a href="https://www.doctoranytime.gr/d/Psychologos/mourtziapi-spyridoula" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-10 py-4 glass-card rounded-full text-[11px] font-bold text-brand-brown tracking-widest no-accents group">
                     ΔΙΑΒΑΣΤΕ ΣΤΟ
-                    <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 group-hover:scale-105 transition-transform mix-blend-multiply" alt="Doctoranytime">
+                    <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5 group-hover:scale-105 transition-transform" alt="Doctoranytime">
                 </a>
             </div>
 
             <!-- Vertical Scrolling Container -->
-            <div class="relative h-[650px] overflow-hidden vertical-marquee-container flex justify-center reveal reveal-delay-2">
-                <div class="w-full max-w-lg flex flex-col gap-8 animate-vertical-marquee marquee-content text-center">
+            <div class="relative h-[650px] overflow-hidden vertical-marquee-container flex justify-center lg:justify-end reveal reveal-delay-2">
+                <div class="w-full max-w-lg flex flex-col gap-6 animate-vertical-marquee marquee-content">
                     <!-- ====== FIRST HALF ====== -->
-                    <div class="flex flex-col gap-8">
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <div class="flex flex-col gap-6">
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Με βοηθάει στο να μπορώ να ελέγχω κάποιες σκέψεις που δεν είναι εύκολο να διαχειριστώ. Έψαχνα χρόνια για κατάλληλη ειδικό!"</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ΜΙΧΑΛΗΣ</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">11 Φεβρουαρίου 2026 • 6 αξιολογήσεις</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Με βοηθάει στο να μπορώ να ελέγχω κάποιες σκέψεις που δεν είναι εύκολο να διαχειριστώ. Έψαχνα χρόνια για κατάλληλη ειδικό!"</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ΜΙΧΑΛΗΣ</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">11 Φεβρουαρίου 2026 • 6 αξιολογήσεις</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία."</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ΑΘΗΝΑ</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">08 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία."</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ΑΘΗΝΑ</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">08 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια."</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ANASTASIA</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια."</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ANASTASIA</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Φοβερή επαγγελματίας, με προσέγγισε με το κατάλληλο τρόπο ώστε να νιώσω άνετα και οικία από την πρώτη κιόλας συνεδρία!"</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ARIS</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Φοβερή επαγγελματίας, με προσέγγισε με το κατάλληλο τρόπο ώστε να νιώσω άνετα και οικία από την πρώτη κιόλας συνεδρία!"</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ARIS</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Άκουσε προσεκτικά όσα είχα να πω, χωρίς καμία κριτική, και με βοήθησε να δω πιο καθαρά καταστάσεις. Την προτείνω ανεπιφύλακτα."</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">PANAGIOTA</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Άκουσε προσεκτικά όσα είχα να πω, χωρίς καμία κριτική, και με βοήθησε να δω πιο καθαρά καταστάσεις. Την προτείνω ανεπιφύλακτα."</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">PANAGIOTA</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- ====== SECOND HALF (Exact Duplicate) ====== -->
-                    <div class="flex flex-col gap-8" aria-hidden="true">
-                         <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <div class="flex flex-col gap-6" aria-hidden="true">
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Με βοηθάει στο να μπορώ να ελέγχω κάποιες σκέψεις που δεν είναι εύκολο να διαχειριστώ. Έψαχνα χρόνια για κατάλληλη ειδικό!"</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ΜΙΧΑΛΗΣ</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">11 Φεβρουαρίου 2026 • 6 αξιολογήσεις</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Με βοηθάει στο να μπορώ να ελέγχω κάποιες σκέψεις που δεν είναι εύκολο να διαχειριστώ. Έψαχνα χρόνια για κατάλληλη ειδικό!"</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ΜΙΧΑΛΗΣ</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">11 Φεβρουαρίου 2026 • 6 αξιολογήσεις</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία."</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ΑΘΗΝΑ</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">08 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Εξαιρετική ψυχολόγος, επαγγελματίας και πάνω απ' όλα άνθρωπος. Με έκανε να νιώσω άνετα από την πρώτη συνεδρία."</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ΑΘΗΝΑ</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">08 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια."</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ANASTASIA</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Από τις θετικότερες εμπειρίες μου. Η κ. Μουρτζιάπη είναι πραγματική επαγγελματίας και από την πρώτη στιγμή νιώθεις ασφάλεια."</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ANASTASIA</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Φοβερή επαγγελματίας, με προσέγγισε με το κατάλληλο τρόπο ώστε να νιώσω άνετα και οικία από την πρώτη κιόλας συνεδρία!"</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">ARIS</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Φοβερή επαγγελματίας, με προσέγγισε με το κατάλληλο τρόπο ώστε να νιώσω άνετα και οικία από την πρώτη κιόλας συνεδρία!"</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">ARIS</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
 
-                        <div class="elegant-card p-10 rounded-[2rem]">
-                            <div class="flex flex-col items-center justify-center mb-6">
-                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 mb-4 mix-blend-multiply opacity-70" alt="DA">
-                                <div class="flex gap-1 text-[#C5A880] mb-2">
-                                    <i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <div class="flex gap-1.5 text-[#CBA135] mb-2">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                    <span class="font-bold text-brand-brown tracking-wider text-sm">10.0 / 10</span>
                                 </div>
-                                <span class="font-bold text-brand-brown tracking-wider text-lg">10.0 / 10</span>
+                                <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5" alt="DA">
                             </div>
-                            <p class="text-brand-brown text-xl mb-8 font-serif italic leading-relaxed text-balance">"Άκουσε προσεκτικά όσα είχα να πω, χωρίς καμία κριτική, και με βοήθησε να δω πιο καθαρά καταστάσεις. Την προτείνω ανεπιφύλακτα."</p>
-                            <div class="border-t border-brand-brown/10 pt-6">
-                                <p class="text-sm font-semibold text-brand-brown tracking-widest no-accents mb-1">PANAGIOTA</p>
-                                <p class="text-sm text-brand-brownLight font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
+                            <p class="text-brand-brown text-lg mb-8 font-serif italic leading-relaxed text-balance">"Άκουσε προσεκτικά όσα είχα να πω, χωρίς καμία κριτική, και με βοήθησε να δω πιο καθαρά καταστάσεις. Την προτείνω ανεπιφύλακτα."</p>
+                            <div class="border-t border-brand-brown/10 pt-5">
+                                <p class="text-[11px] font-bold text-brand-brown tracking-widest no-accents mb-1">PANAGIOTA</p>
+                                <p class="text-xs text-brand-lightbrown font-light tracking-wide">07 Οκτωβρίου 2025 • 1 αξιολόγηση</p>
                             </div>
                         </div>
                     </div>
@@ -664,61 +739,71 @@
     </section>
 
     <!-- Footer / Contact -->
-    <footer id="contact" class="pt-32 pb-12 relative overflow-hidden border-t border-brand-brown/10">
-        <div class="leaf-bg leaf-bottom-left animate-float"></div>
-        <div class="leaf-bg leaf-bottom-right animate-float-delayed"></div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-            
-            <div class="w-64 mb-16 reveal">
-                <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/footerrr.jpg" alt="Logo" class="w-full h-auto mix-blend-multiply">
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-16 mb-24 w-full">
+    <footer id="contact" class="pt-24 pb-10 relative overflow-hidden border-t border-brand-brown/10">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20 mb-20 border-b border-brand-brown/10 pb-16">
                 
-                <div class="reveal flex flex-col items-center">
-                    <h4 class="text-sm font-semibold text-brand-brown mb-8 tracking-widest no-accents">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
-                    <ul class="space-y-6 text-brand-brownLight font-light text-xl">
-                        <li class="flex flex-col items-center gap-2">
-                            <i data-lucide="phone" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
-                            <a href="tel:+306980028877" class="hover:text-brand-brown transition-colors">698 002 8877</a>
+                <div class="lg:col-span-2 reveal">
+                    <!-- Footer Logo provided by you -->
+                    <div class="mb-10">
+                        <img src="https://raw.githubusercontent.com/agelmet/MOURTZIAPI/refs/heads/main/footerrr.jpg" alt="Logo Footer" class="w-full max-w-[220px] object-contain rounded-xl shadow-sm border border-brand-brown/10">
+                    </div>
+                    <p class="text-brand-lightbrown max-w-sm mb-10 font-light leading-relaxed text-xl">
+                        Η επούλωση ξεκινά με ένα βήμα. Επικοινωνήστε για να ορίσουμε την πρώτη σας 100% online συνεδρία, σε ένα περιβάλλον απόλυτης αποδοχής και ασφάλειας.
+                    </p>
+                    <a href="https://www.doctoranytime.gr/d/Psychologos/mourtziapi-spyridoula" target="_blank" class="inline-flex items-center justify-center bg-brand-brown text-brand-beige px-10 py-4 rounded-full font-bold tracking-widest no-accents text-[11px] hover:bg-brand-green hover:text-brand-brown transition-all duration-500 shadow-lg group">
+                        <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" alt="Doctoranytime" class="h-4 mr-3 transition-all brightness-0 invert group-hover:brightness-100 group-hover:invert-0">
+                        ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ
+                    </a>
+                </div>
+
+                <div class="reveal reveal-delay-1">
+                    <h4 class="text-[11px] font-bold text-brand-brown mb-8 tracking-widest no-accents">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
+                    <ul class="space-y-6 text-brand-lightbrown font-light text-lg">
+                        <li class="flex items-start gap-4">
+                            <i data-lucide="laptop" class="w-5 h-5 text-brand-green shrink-0 mt-1 stroke-[1.5]"></i>
+                            <span>Διαδικτυακές Συνεδρίες</span>
                         </li>
-                        <li class="flex flex-col items-center gap-2">
-                            <i data-lucide="mail" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
+                        <li class="flex items-center gap-4">
+                            <i data-lucide="phone" class="w-5 h-5 text-brand-green shrink-0 stroke-[1.5]"></i>
+                            <a href="tel:+306980028877" class="hover:text-brand-brown transition-colors tracking-wide">6980028877</a>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i data-lucide="mail" class="w-5 h-5 text-brand-green shrink-0 stroke-[1.5]"></i>
                             <a href="mailto:pepimourtziapi@gmail.com" class="hover:text-brand-brown transition-colors">pepimourtziapi@gmail.com</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="reveal reveal-delay-1 flex flex-col items-center">
-                    <h4 class="text-sm font-semibold text-brand-brown mb-8 tracking-widest no-accents">ΤΟΠΟΘΕΣΙΑ</h4>
-                    <ul class="space-y-6 text-brand-brownLight font-light text-xl">
-                        <li class="flex flex-col items-center gap-2">
-                            <i data-lucide="laptop" class="w-6 h-6 text-brand-brown stroke-[1.5]"></i>
-                            <span>Διαδικτυακές Συνεδρίες</span>
+                <div class="reveal reveal-delay-2">
+                    <h4 class="text-[11px] font-bold text-brand-brown mb-8 tracking-widest no-accents">ΠΛΗΡΟΦΟΡΙΕΣ</h4>
+                    <ul class="space-y-6 text-brand-lightbrown font-light text-lg mb-10">
+                        <li class="flex items-center gap-4">
+                            <i data-lucide="clock" class="w-5 h-5 text-brand-green shrink-0 stroke-[1.5]"></i>
+                            <div>
+                                <span class="block">Δευτέρα - Σάββατο</span>
+                                <span class="text-sm text-brand-lightbrown mt-1 block">Κατόπιν Ραντεβού</span>
+                            </div>
                         </li>
                     </ul>
-                </div>
-
-                <div class="reveal reveal-delay-2 flex flex-col items-center">
-                    <h4 class="text-sm font-semibold text-brand-brown mb-8 tracking-widest no-accents">ΣΥΝΔΕΘΕΙΤΕ</h4>
-                    <div class="flex items-center gap-6">
-                        <a href="https://www.instagram.com/pepimourtziapi/" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform duration-300 mix-blend-multiply opacity-80 hover:opacity-100">
-                            <img src="https://raw.githubusercontent.com/agelmet/Image-hosting-/refs/heads/main/instagram-logo-instagram-icon-transparent-free-png.png.webp" alt="Instagram" class="w-10 h-10 object-contain">
+                    
+                    <div class="flex items-center gap-4">
+                        <a href="https://www.instagram.com/pepimourtziapi/" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform duration-300" title="pepimourtziapi">
+                            <!-- Social media icon in original color -->
+                            <img src="https://raw.githubusercontent.com/agelmet/Image-hosting-/refs/heads/main/instagram-logo-instagram-icon-transparent-free-png.png.webp" alt="Instagram" class="w-8 h-8 object-contain">
                         </a>
-                        <a href="https://www.instagram.com/inspy.therapy/" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform duration-300 mix-blend-multiply opacity-80 hover:opacity-100 text-brand-brown font-serif text-lg font-bold">
-                            <!-- Fallback or additional text icon for inspy.therapy -->
-                            inspy
+                        <a href="https://www.instagram.com/inspy.therapy/" target="_blank" rel="noopener" class="text-brand-lightbrown hover:text-brand-brown font-light transition-colors">
+                            @pepimourtziapi / @inspy.therapy
                         </a>
                     </div>
                 </div>
 
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 reveal w-full border-t border-brand-brown/10 pt-10">
-                <p class="text-brand-brownLight text-sm tracking-wider">© 2026 Σπυριδούλα Μουρτζιάπη.</p>
-                <p class="text-brand-brownLight text-sm tracking-wider">
-                    Designed by <a href="https://advonmedia.com" target="_blank" rel="noopener" class="text-brand-brown font-semibold hover:text-brand-primary transition-colors">Advon Media</a>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 reveal">
+                <p class="text-brand-lightbrown text-xs tracking-wider">© 2026 Σπυριδούλα Μουρτζιάπη. Με επιφύλαξη παντός δικαιώματος.</p>
+                <p class="text-brand-lightbrown text-xs tracking-wider">
+                    Designed by <a href="https://advonmedia.com" target="_blank" rel="noopener" class="font-medium hover:text-brand-brown transition-colors">Advon Media</a>
                 </p>
             </div>
         </div>
@@ -726,8 +811,10 @@
 
     <!-- Scripts -->
     <script>
+        // Initialize Icons
         lucide.createIcons();
 
+        // Mobile Navigation Toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -744,43 +831,63 @@
             });
         });
 
+        // Navbar Scroll Styling
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.add('py-4');
+                navbar.classList.add('py-4', 'bg-brand-beige/95', 'backdrop-blur-2xl', 'shadow-sm');
                 navbar.classList.remove('py-6');
             } else {
                 navbar.classList.add('py-6');
-                navbar.classList.remove('py-4');
+                navbar.classList.remove('py-4', 'bg-brand-beige/95', 'backdrop-blur-2xl', 'shadow-sm');
             }
         });
 
+        // Parallax Effect for Leaves
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            document.querySelectorAll('.parallax-wrapper').forEach(wrapper => {
+                const speed = wrapper.getAttribute('data-speed') || 0.1;
+                // Applying transform
+                wrapper.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // FAQ Toggle Logic
         const faqBtns = document.querySelectorAll('.faq-btn');
         faqBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const content = this.nextElementSibling;
                 const icon = this.querySelector('.faq-icon');
                 
+                // Close other open FAQs
                 faqBtns.forEach(otherBtn => {
                     if (otherBtn !== this) {
                         const otherContent = otherBtn.nextElementSibling;
                         const otherIcon = otherBtn.querySelector('.faq-icon');
                         otherContent.style.maxHeight = null;
-                        otherIcon.classList.remove('rotate-180');
+                        otherIcon.classList.remove('rotate-45');
                     }
                 });
 
+                // Toggle current FAQ
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
-                    icon.classList.remove('rotate-180');
+                    icon.classList.remove('rotate-45');
                 } else {
                     content.style.maxHeight = content.scrollHeight + "px";
-                    icon.classList.add('rotate-180');
+                    icon.classList.add('rotate-45');
                 }
             });
         });
 
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        // Intersection Observer for Scroll Reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
